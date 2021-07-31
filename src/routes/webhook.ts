@@ -16,9 +16,9 @@ interface ReqInterface {
     };
 }
 
-const { VERIFY_TOKEN, PAGE_ACCESS_TOKEN } = process.env;
+const { VERIFY_TOKEN } = process.env;
 
-if (!VERIFY_TOKEN || !PAGE_ACCESS_TOKEN) {
+if (!VERIFY_TOKEN) {
     throw new Error("Token not Found!");
 }
 
