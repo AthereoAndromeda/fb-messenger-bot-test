@@ -1,0 +1,45 @@
+{
+  "name": "messenger-bot",
+  "version": "1.0.0",
+  "description": "Messenger Bot",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "node -r dotenv/config .",
+    "ts-dev": "ts-node-dev -r dotenv/config src/index.ts",
+    "build": "tsc",
+    "swc-build": "swc src -d dist",
+    "start": "node .",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redstripez08/fb-messenger-bot-test.git"
+  },
+  "author": "Angelo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/redstripez08/fb-messenger-bot-test/issues"
+  },
+  "homepage": "https://github.com/redstripez08/fb-messenger-bot-test#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "fastify": "^3.19.2",
+    "fastify-plugin": "^3.0.0"
+  },
+  "devDependencies": {
+    "@swc/cli": "^0.1.46",
+    "@swc/core": "^1.2.69",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.4.8",
+    "@typescript-eslint/eslint-plugin": "^4.28.5",
+    "@typescript-eslint/parser": "^4.28.5",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "jest": "^27.0.6",
+    "pino-pretty": "^5.1.2",
+    "ts-jest": "^27.0.4",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
+  }
+}
