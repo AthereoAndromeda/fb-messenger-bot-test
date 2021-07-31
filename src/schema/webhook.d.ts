@@ -4,20 +4,26 @@ interface QuickReply {
     payload: string | number;
 }
 
+/**
+ * Message to be sent
+ */
+export interface ReplyMessage {
+    text?: string;
+    attachment?: Attachment;
+    quick_replies?: QuickReply;
+}
+
 export interface ReplyMessageObject {
     messaging_type?: "RESPONSE" | "UPDATE" | "MESSAGE_TAG";
     recipient: {
         id: string;
     };
-    message: {
-        text?: string;
-        attachment?: Attachment;
-        quick_replies?: QuickReply;
-    };
+    message: ReplyMessage;
 }
 
+// TODO rename Message to something clearer
 /**
- * Message to be sent. Either `text` or `attachments` is required.
+ * Message received
  */
 export interface Message {
     mid?: string;
