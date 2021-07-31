@@ -1,4 +1,4 @@
-import { Attachment, Message } from "src/schema/webhook";
+import { Attachment, Message, ReplyMessageObject } from "src/schema/webhook";
 import { callSendAPI } from "./callSendAPI";
 
 /**
@@ -10,49 +10,65 @@ export function handleMessage(
     sender_psid: string,
     received_message: Message
 ): void {
-    let response;
-
     if (received_message.text) {
+        let response: ReplyMessageObject;
+
         if (received_message.text === "c!lol") {
             response = {
-                text: "AMOGUS!",
+                recipient: {
+                    id: sender_psid,
+                },
+                message: { text: "AMOGUS!" },
             };
         } else {
             response = {
-                text: "Hemlo",
+                recipient: {
+                    id: sender_psid,
+                },
+                message: { text: "Hemlo" },
             };
         }
+
+        callSendAPI(response);
     } else if (received_message.attachments) {
+        // Takes sent picture
         const attachment_url = received_message.attachments[0].payload.url;
 
-        response = {
-            attachment: {
-                type: "template",
-                payload: {
-                    template_type: "generic",
-                    elements: [
-                        {
-                            title: "Is this the right picture?",
-                            subtitle: "Tap a button to answer.",
-                            image_url: attachment_url,
-                            buttons: [
-                                {
-                                    type: "postback",
-                                    title: "Yes!",
-                                    payload: "yes",
-                                },
-                                {
-                                    type: "postback",
-                                    title: "No!",
-                                    payload: "no",
-                                },
-                            ],
-                        },
-                    ],
-                },
-            } as Attachment,
+        const attachment: Attachment = {
+            type: "template",
+            payload: {
+                template_type: "generic",
+                elements: [
+                    {
+                        title: "Is this the right picture?",
+                        subtitle: "Tap a button to answer.",
+                        image_url: attachment_url,
+                        buttons: [
+                            {
+                                type: "postback",
+                                title: "Yes!",
+                                payload: "yes",
+                            },
+                            {
+                                type: "postback",
+                                title: "No!",
+                                payload: "no",
+                            },
+                        ],
+                    },
+                ],
+            },
         };
-    }
 
-    callSendAPI(sender_psid, response);
+        const response: ReplyMessageObject = {
+            recipient: {
+                id: sender_psid,
+            },
+            message: {
+                attachment,
+            },
+        };
+
+        callSendAPI(response);
+    }
 }
