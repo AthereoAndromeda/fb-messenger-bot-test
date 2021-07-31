@@ -12,30 +12,18 @@ if (!PAGE_ACCESS_TOKEN) {
  * @param sender_psid
  * @param response
  */
-export function callSendAPI(
-    sender_psid: string,
-    response?: ReplyMessageObject["message"]
-): void {
-    // Construct the message body
-    const request_body = {
-        recipient: {
-            id: sender_psid,
-        },
-        message: response,
-    };
+export async function callSendAPI(
+    response?: ReplyMessageObject
+): Promise<void> {
+    try {
+        const link = "https://graph.facebook.com/v11.0/me/messages";
 
-    axios
-        .post("https://graph.facebook.com/v11.0/me/messages", request_body, {
+        await axios.post(link, response, {
             params: {
                 access_token: PAGE_ACCESS_TOKEN,
             },
-        })
-        .then(res => {
-            console.log("sent");
-            console.log(res.data);
-        })
-        .catch(err => {
-            console.error(err);
-            console.log("oofed");
         });
+    } catch (error) {
+        console.error(error);
+    }
 }
