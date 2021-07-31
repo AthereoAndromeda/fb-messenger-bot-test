@@ -1,4 +1,5 @@
 import fastify from "fastify";
+import { buildServer } from "./server";
 
 const app = fastify({
     logger: {
@@ -6,4 +7,7 @@ const app = fastify({
     },
 });
 
-app.listen(8080);
+(async () => {
+    const server = await buildServer(app);
+    server.listen(8080);
+})();
