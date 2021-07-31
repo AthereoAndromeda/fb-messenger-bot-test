@@ -1,13 +1,38 @@
+interface QuickReply {
+    content_type: "text" | "user_phone_number" | "user_email";
+    title: string;
+    payload: string | number;
+}
+
+export interface ReplyMessageObject {
+    messaging_type?: "RESPONSE" | "UPDATE" | "MESSAGE_TAG";
+    recipient: {
+        id: string;
+    };
+    message: {
+        text?: string;
+        attachment?: Attachment;
+        quick_replies?: QuickReply;
+    };
+}
+
+/**
+ * Message to be sent. Either `text` or `attachments` is required.
+ */
 export interface Message {
-    mid: string;
-    text: string;
-    attachments: Attachment[];
+    mid?: string;
+    text?: string;
+    attachments?: Attachment[];
+    quick_replies?: QuickReply[];
+    metadata?: string;
 }
 
 export interface Attachment {
-    type: "image" | "video" | "audio" | "file";
+    type: "image" | "video" | "audio" | "file" | "template";
     payload: {
-        url: string;
+        url?: string;
+        template_type?: "generic" | "button" | "media" | "receipt";
+        [element: string]: unknown;
     };
 }
 
