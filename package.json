@@ -24,7 +24,7 @@
   "homepage": "https://github.com/redstripez08/fb-messenger-bot-test#readme",
   "dependencies": {
     "axios": "^0.21.1",
-    "fastify": "^3.19.2",
+    "fastify": "^3.20.0",
     "fastify-plugin": "^3.0.0"
   },
   "devDependencies": {
