@@ -28,7 +28,7 @@
     "fastify-plugin": "^3.0.0"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.46",
+    "@swc/cli": "^0.1.49",
     "@swc/core": "^1.2.78",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.6.1",
